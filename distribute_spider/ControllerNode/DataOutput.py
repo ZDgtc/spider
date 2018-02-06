@@ -38,7 +38,7 @@ class DataOutput(object):
         fout.close()
 
     def output_end(self, filepath):
-        fout = codecs.open(filepath, 'w', encoding='utf-8')
+        fout = codecs.open(filepath, 'a', encoding='utf-8')
         fout.write('</table>')
         fout.write('</body>')
         fout.write('</html>')

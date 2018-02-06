@@ -16,8 +16,8 @@ class URLManager(object):
     # 从未爬取URL集合中获取一个URL
     def get_new_url(self):
         new_url = self.new_urls.pop()
-        m = hashlib.md5
-        m.update(new_url)
+        m = hashlib.md5()
+        m.update(new_url.encode())
         self.used_urls.add(m.hexdigest()[8:-8])
         return new_url
 
@@ -25,8 +25,8 @@ class URLManager(object):
     def add_new_url(self, new_url):
         if new_url is None:
             return
-        m = hashlib.md5
-        m.update(new_url)
+        m = hashlib.md5()
+        m.update(new_url.encode())
         # 验证该URL是否已存在未爬取URL集合中，以及md5摘要是否已包含在已爬取URL集合中
         if new_url not in self.new_urls and m.hexdigest()[8:-8] not in self.used_urls:
             self.new_urls.add(new_url)
